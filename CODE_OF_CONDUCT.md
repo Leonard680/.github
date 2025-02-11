@@ -123,11 +123,78 @@ Community Impact Guidelines were inspired by
 [Mozilla's code of conduct enforcement ladder][Mozilla CoC].
 
 For answers to common questions about this code of conduct, see the FAQ at
-[https://www.contributor-covenant.org/faq][FAQ]. Translations are available at
-[https://www.contributor-covenant.org/translations][translations].
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Balance System</title>
+    <style>
+        body {
+            background-color: red;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .balance-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+        }
+        .tap-button {
+            display: block;
+            margin-top: 50px;
+            padding: 15px;
+            background-color: blue;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .tap-button::before {
+            content: "₿ "; /* Bitcoin Symbol */
+        }
+        .leaderboard {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="balance-container">
+        Balance: <span id="userBalance">0</span>
+    </div>
+    <button class="tap-button" onclick="increaseBalance()">Tap</button>
 
-[homepage]: https://www.contributor-covenant.org
-[v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
-[Mozilla CoC]: https://github.com/mozilla/diversity
-[FAQ]: https://www.contributor-covenant.org/faq
-[translations]: https://www.contributor-covenant.org/translations
+    <h2>Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+
+    <script>
+        let balance = 0; 
+        const phoneNumbers = ["1234567890", "0987654321"];
+        const adminPhone = "09012799868";
+
+        function increaseBalance() {
+            balance += 10;
+            document.getElementById("userBalance").innerText = balance;
+        }
+
+        function loadLeaderboard() {
+            const users = [
+                { name: "User1", balance: 500 },
+                { name: "User2", balance: 400 },
+                { name: "User3", balance: 300 },
+            ];
+            let leaderboardList = document.getElementById("leaderboard");
+            leaderboardList.innerHTML = "";
+            users.slice(0, 10).forEach(user => {
+                let listItem = document.createElement("li");
+                listItem.innerText = `${user.name} - ${user.balance}`;
+                leaderboardList.appendChild(listItem);
+            });
+        }
+
+        loadLeaderboard();
+    </script>
+</body>
+</html>
